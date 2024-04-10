@@ -19,6 +19,9 @@ from django.urls import path
 # PyGithub
 import gh.views
 
+# movies as tasks
+import movies.views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
@@ -26,4 +29,11 @@ urlpatterns = [
 # PyGithub
 urlpatterns += [
     path("", gh.views.index),
+]
+
+# movies as tasks
+urlpatterns += [
+    path("search/", movies.views.search, name="search"),
+    path("search-wait/<uuid:result_uuid>/", movies.views.search_wait, name="search_wait"),
+    path("search-results/", movies.views.search_results, name="search_results"),
 ]

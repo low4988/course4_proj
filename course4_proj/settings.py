@@ -24,8 +24,8 @@ class Dev(Configuration):
     # fetch by DJANGO_OMDB_KEY, set in env by export DJANGO_OMDB_KEY=abc123 or 
     # $ DJANGO_OMDB_KEY=abc123 python manage.py [command...]
     
-    # Commented for non-OMBD app interaction
-    #OMDB_KEY = values.SecretValue() # alternative add here during dev as literal
+    # Commented  out for non-OMBD app interaction
+    OMDB_KEY = values.SecretValue() # alternative add here during dev as literal
     
     # add logging
     LOGGING = {
@@ -65,7 +65,7 @@ class Dev(Configuration):
     
     # Add ALLOWED_HOSTS and codio setup settings
     #ALLOWED_HOSTS = [] codio.co.uk
-    ALLOWED_HOSTS = values.ListValue(["localhost", "0.0.0.0", ".codio.io", os.environ.get('CODIO_HOSTNAME') + '-8000.codio.io','tahitimambo-springboxer-8000.codio-box.uk'])
+    ALLOWED_HOSTS = values.ListValue(["localhost", "0.0.0.0", ".codio.io", os.environ.get('CODIO_HOSTNAME') + '-8000.codio.io','tahitimambo-springboxer-8000.codio-box.uk', 'claudiamulti-judotrilogy-8000.codio-box.uk'])
     X_FRAME_OPTIONS = "ALLOW-FROM " + os.environ.get("CODIO_HOSTNAME") + "-8000.codio.io"
     CSRF_COOKIE_SAMESITE = None
     CSRF_TRUSTED_ORIGINS = [os.environ.get("CODIO_HOSTNAME") + "-8000.codio.io"]
@@ -74,6 +74,10 @@ class Dev(Configuration):
     CSRF_COOKIE_SAMESITE = "None"
     SESSION_COOKIE_SAMESITE = "None"
 
+
+    # CELERY_ prefix, as defined by 'namespace' argument in celery.py
+    CELERY_RESULT_BACKEND = "django-db"
+    CELERY_BROKER_URL = "redis://localhost:6379/0"
 
     # Application definition
 
@@ -87,7 +91,9 @@ class Dev(Configuration):
         # movies app
         'movies',
         # PyGithub library, as gh app
-        'gh'
+        'gh',
+        # celery in django database
+        'django_celery_results'
     ]
 
     MIDDLEWARE = [
