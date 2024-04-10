@@ -23,7 +23,10 @@ class Dev(Configuration):
     # values.SecretValue() This prevents manage.py from running unless the DJANGO_OMDB_KEY value is present as an environment variable. 
     # fetch by DJANGO_OMDB_KEY, set in env by export DJANGO_OMDB_KEY=abc123 or 
     # $ DJANGO_OMDB_KEY=abc123 python manage.py [command...]
-    OMDB_KEY = values.SecretValue() # alternative add here during dev as literal
+    
+    # Commented for non-OMBD app interaction
+    #OMDB_KEY = values.SecretValue() # alternative add here during dev as literal
+    
     # add logging
     LOGGING = {
         "version": 1,
@@ -62,7 +65,7 @@ class Dev(Configuration):
     
     # Add ALLOWED_HOSTS and codio setup settings
     #ALLOWED_HOSTS = [] codio.co.uk
-    ALLOWED_HOSTS = values.ListValue(["localhost", "0.0.0.0", ".codio.io", os.environ.get('CODIO_HOSTNAME') + '-8000.codio.io'])
+    ALLOWED_HOSTS = values.ListValue(["localhost", "0.0.0.0", ".codio.io", os.environ.get('CODIO_HOSTNAME') + '-8000.codio.io','tahitimambo-springboxer-8000.codio-box.uk'])
     X_FRAME_OPTIONS = "ALLOW-FROM " + os.environ.get("CODIO_HOSTNAME") + "-8000.codio.io"
     CSRF_COOKIE_SAMESITE = None
     CSRF_TRUSTED_ORIGINS = [os.environ.get("CODIO_HOSTNAME") + "-8000.codio.io"]
@@ -83,6 +86,8 @@ class Dev(Configuration):
         'django.contrib.staticfiles',
         # movies app
         'movies',
+        # PyGithub library, as gh app
+        'gh'
     ]
 
     MIDDLEWARE = [

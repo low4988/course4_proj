@@ -16,6 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+# PyGithub
+import gh.views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+]
+
+# PyGithub
+urlpatterns += [
+    path("", gh.views.index),
 ]
