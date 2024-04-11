@@ -8,10 +8,11 @@ class SearchTerm(models.Model):
     term = models.TextField(unique=True)
     last_search = models.DateTimeField(auto_now=True)
     '''
-    The term that’s searched for, term, is unique. 
+    The term that's searched for, term, is unique. 
     The last_search is the date that the search was last performed. 
-    We use this to make sure the search isn’t repeated too often.
+      -We use this to make sure the search isn't repeated too often.
     '''
+
 class Genre(models.Model):
     class Meta:
         ordering = ["name"]

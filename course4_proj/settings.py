@@ -12,13 +12,19 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
-#New imports
+#New course4_proj imports
 from configurations import Configuration
 from configurations import values
 import os
 
+  
+
 # create class Dev(Configuration) and indent all
 class Dev(Configuration):
+    # output emails to console instead of sending with server
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    # Name address tuple, where to send emails(not actually sent)
+    ADMINS = [("Ben", "ben@example.com")]
     # Add api_key
     # values.SecretValue() This prevents manage.py from running unless the DJANGO_OMDB_KEY value is present as an environment variable. 
     # fetch by DJANGO_OMDB_KEY, set in env by export DJANGO_OMDB_KEY=abc123 or 
