@@ -71,7 +71,7 @@ class Dev(Configuration):
     
     # Add ALLOWED_HOSTS and codio setup settings
     #ALLOWED_HOSTS = [] codio.co.uk
-    ALLOWED_HOSTS = values.ListValue(["localhost", "0.0.0.0", ".codio.io", os.environ.get('CODIO_HOSTNAME') + '-8000.codio.io','tahitimambo-springboxer-8000.codio-box.uk', 'claudiamulti-judotrilogy-8000.codio-box.uk'])
+    ALLOWED_HOSTS = values.ListValue(["localhost", "0.0.0.0", ".codio.io", os.environ.get('CODIO_HOSTNAME') + '-8000.codio.io','tahitimambo-springboxer-8000.codio-box.uk', 'claudiamulti-judotrilogy-8000.codio-box.uk','canadamustang-charmexodus-8000.codio-box.uk'])
     X_FRAME_OPTIONS = "ALLOW-FROM " + os.environ.get("CODIO_HOSTNAME") + "-8000.codio.io"
     CSRF_COOKIE_SAMESITE = None
     CSRF_TRUSTED_ORIGINS = [os.environ.get("CODIO_HOSTNAME") + "-8000.codio.io"]
@@ -99,7 +99,9 @@ class Dev(Configuration):
         # PyGithub library, as gh app
         'gh',
         # celery in django database
-        'django_celery_results'
+        'django_celery_results',
+        # celery beat scheduler, periodic tasks
+        'django_celery_beat'
     ]
 
     MIDDLEWARE = [
